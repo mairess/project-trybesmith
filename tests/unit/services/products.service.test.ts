@@ -28,4 +28,14 @@ it('Throws an error missing property "name".', async function () {
   expect(serviceResponse.status).to.eq('INVALID_DATA');
   expect(serviceResponse.data).to.deep.equal({ message: 'Name is required' });
 })
+it('Returns all available products.', async function () {
+  // Arrange
+  const mockCreateReturn = ProductModel.bulkBuild(productMocks.createdProducts);
+  sinon.stub(ProductModel, 'findAll').resolves(mockCreateReturn);
+  // Act
+  const serviceResponse = await productsService.list();
+  // Assert
+  expect(serviceResponse.status).to.eq('SUCCESSFUL');
+  expect(serviceResponse.data).to.deep.equal(mockCreateReturn);
+})
 });
