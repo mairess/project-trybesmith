@@ -11,11 +11,13 @@ async function create(req: Request, res: Response) {
 }
 
 async function list(_req: Request, res: Response) {
-  const serviceResponse = await productsService.list();
-  if (serviceResponse.status !== 'SUCCESSFUL') {
-    return res.status(mapStatusHTTP(serviceResponse.status)).json(serviceResponse.data);  
+  try {
+    const serviceResponse = await productsService.list();
+    res.status(200).json(serviceResponse.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal error!' });
   }
-  res.status(200).json(serviceResponse.data);
 }
 
 export default {
