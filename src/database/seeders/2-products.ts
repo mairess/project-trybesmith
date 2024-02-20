@@ -1,8 +1,8 @@
 import { QueryInterface } from 'sequelize';
 
 export default {
-  up(queryInterface: QueryInterface) {
-    return queryInterface.bulkInsert('products', [
+  async up(queryInterface: QueryInterface) {
+    return await queryInterface.bulkInsert('products', [
       {
         name: 'Excalibur',
         price: '10 peças de ouro',
@@ -31,7 +31,7 @@ export default {
     ], {});
   },
   
-  down(queryInterface: QueryInterface) {
-    return queryInterface.bulkDelete('products', {});
+  async down(queryInterface: QueryInterface) {
+    return await queryInterface.bulkDelete('products', {});
   }
 };

@@ -4,8 +4,8 @@ import bcrypt from 'bcryptjs';
 const SALT_ROUNDS = process.env.BCRYPT_SALT_ROUNDS || 10;
 
 export default {
-  up(queryInterface: QueryInterface) {
-    return queryInterface.bulkInsert('users', [
+  async up(queryInterface: QueryInterface) {
+    return await queryInterface.bulkInsert('users', [
       {
         username: 'Hagar',
         vocation: 'Guerreiro',
@@ -27,7 +27,7 @@ export default {
     ], {});
   },
   
-  down(queryInterface: QueryInterface) {
-    return queryInterface.bulkDelete('users', {});
+  async down(queryInterface: QueryInterface) {
+    return await queryInterface.bulkDelete('users', {});
   }
 };
