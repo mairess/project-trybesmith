@@ -1,8 +1,8 @@
 export type User = {
-  id: 'fake';
-  username: 'fake';
-  vocation: 'fake';
-  level: 'fake';
-  password: 'fake';
-  productIds: 'fake';
+  id: number;
+  username: string;
+  vocation: string;
+  level: number;
+  password: string;
+  productIds?: number;
 };
