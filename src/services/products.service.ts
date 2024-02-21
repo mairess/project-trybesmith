@@ -7,11 +7,11 @@ async function create(product:Product): Promise<ServiceResponse<Product>> {
   let responseService: ServiceResponse<Product>;
   const error = validateParams(product);
   if (error) {
-    responseService = { status: 'INVALID_DATA', data: { message: error } };
+    responseService = { status: 'BAD_REQUEST', data: { message: error } };
     return responseService;
   }
   const newProduct = await ProductModel.create(product);
-  responseService = { status: 'SUCCESSFUL', data: newProduct.dataValues };
+  responseService = { status: 'CREATED', data: newProduct.dataValues };
   return responseService;
 }
 

@@ -14,7 +14,7 @@ it('Creates a product.', async function () {
   // Act
   const serviceResponse = await productsService.create(parameters);
   // Assert
-  expect(serviceResponse.status).to.eq('SUCCESSFUL');
+  expect(serviceResponse.status).to.eq('CREATED');
   expect(serviceResponse.data).to.deep.equal(productMocks.createdProduct);
 })
 it('Throws an error missing property "name".', async function () {
@@ -25,7 +25,7 @@ it('Throws an error missing property "name".', async function () {
   // Act
   const serviceResponse = await productsService.create(parameters);
   // Assert
-  expect(serviceResponse.status).to.eq('INVALID_DATA');
+  expect(serviceResponse.status).to.eq('BAD_REQUEST');
   expect(serviceResponse.data).to.deep.equal({ message: 'Name is required' });
 })
 it('Returns all available products.', async function () {

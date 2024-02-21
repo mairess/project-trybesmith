@@ -23,7 +23,7 @@ describe('ProductsController', function () {
     // Arrange
     req.body = productMocks.validProduct;
     sinon.stub(productsService, 'create').resolves({
-      status: 'SUCCESSFUL',
+      status: 'CREATED',
       data: productMocks.createdProduct,
     });
     // Act
@@ -37,7 +37,7 @@ describe('ProductsController', function () {
     // Arrange
     req.body = productMocks.missingNameProduct;
     sinon.stub(productsService, 'create').resolves({
-      status: 'INVALID_DATA',
+      status: 'BAD_REQUEST',
       data: { message: 'Name is required' },
     });
     // Act
@@ -68,7 +68,8 @@ describe('ProductsController', function () {
     await productsController.list(req, res);
     // Assert
     expect(res.status).to.have.been.calledWith(500);
-    expect(res.json).to.have.been.calledWith({ message: 'Internal error!' });
+    expect(res.json).to.have.been.calledWith({ message: 'INTERNAL_SERVER_ERROR' });
   });
+  
 
 });
