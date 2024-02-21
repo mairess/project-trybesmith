@@ -21,7 +21,7 @@ async function list(): Promise<ServiceResponse<UserWithProductsId[]>> {
 
   const usersWithProductIds = (users as UserWithProductsIdModel[]).map(({ dataValues: user }) => ({
     username: user.username,
-    productIds: user.productIds.map((product) => product.id),
+    productIds: user.productIds?.map((product) => product.id),
   }));
 
   return { status: 'SUCCESSFUL', data: usersWithProductIds || [] };
