@@ -8,7 +8,7 @@ describe('LoginService', function () {
   beforeEach(function () { sinon.restore(); });
   const missingPropertiesMessage = { "message": "\"username\" and \"password\" are required" };
   const badUsernameOrPasswordMessage = { "message": "Username or password invalid" };
-  it('Returns jwt token login with valid login data.', async function () {
+  it('Returns jwt login with valid login data.', async function () {
     // Arrange
     const parameters = loginMock.validLoginBody;
     const mockFindOneReturn = UserModel.build(loginMock.existingUser);
@@ -22,7 +22,7 @@ describe('LoginService', function () {
     expect(serviceResponse.data).to.have.key('token');
   });
 
-  it('Throws an error missing property "username".', async function () {
+  it('Throws an error when missing property "username".', async function () {
     // Arrange
     const parameters = loginMock.noUsernameLoginBody;
 
@@ -35,7 +35,7 @@ describe('LoginService', function () {
     expect(serviceResponse.data).to.deep.eq(missingPropertiesMessage);  
   });
 
-  it('Throws an error missing property "password".', async function () {
+  it('Throws an error when missing property "password".', async function () {
     // Arrange
     const parameters = loginMock.noUsernameLoginBody;
 
