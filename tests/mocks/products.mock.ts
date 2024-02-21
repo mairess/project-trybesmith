@@ -1,7 +1,6 @@
 import { Product } from '../../src/types/Product';
 
-const validProduct: Product = {
-    'id': 2,
+const validProduct = {
     'name': 'Peixeira do Agreste',
     'price': "10 peças de ouro",
     'userId': 1,
@@ -14,14 +13,13 @@ const createdProduct = {
     'userId': 1,
 }
 
-const missingNameProduct: Product = {
-    'id': 2,
+const missingNameProduct = {
     'name': '',
     'price': "10 peças de ouro",
     'userId': 1,
 }
 
-const createdProducts: Product[] = [
+const createdProducts = [
     {
       "id": 1,
       "name": "Excalibur",
