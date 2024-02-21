@@ -6,7 +6,7 @@ import UserModel from '../../../src/database/models/user.model';
 
 describe('UsersService', function () {
   beforeEach(function () { sinon.restore(); });
-  it('Returna all users with their productsId.', async function () {
+  it('Returns all users with their products id.', async function () {
     // Arrange
     const mockCreateReturn = UserModel.bulkBuild((userMocks.CreatedUsersWithProducts) as any);
     sinon.stub(UserModel, 'findAll').resolves(mockCreateReturn);
