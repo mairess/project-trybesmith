@@ -90,4 +90,16 @@ describe('LoginController', function () {
     expect(res.status).to.have.been.calledWith(401);
     expect(res.json).to.have.been.calledWith(badUsernameOrPasswordMessage);
   });
+
+  it('Handles internal error when verifying login.', async function () {
+    // Arrange
+    const mockCreateReturn = new Error('Internal error');
+    sinon.stub(loginService, 'verifyLogin').rejects(mockCreateReturn);
+    // Act
+    await loginController.login(req, res, next);
+    // Assert
+    expect(next).to.have.been.calledOnce;
+    expect(next.args[0][0]).to.be.instanceOf(Error);
+    expect(next.args[0][0].message).to.equal('Internal error');
+  });
 });
