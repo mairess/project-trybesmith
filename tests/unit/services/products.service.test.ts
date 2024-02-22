@@ -1,6 +1,8 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import productMocks from '../../mocks/products.mock'
+import loginMocks from '../../mocks/login.mock'
+import UserModel from '../../../src/database/models/user.model'
 import ProductModel from '../../../src/database/models/product.model'
 import productsService from '../../../src/services/products.service'
 
@@ -11,6 +13,8 @@ it('Creates a product.', async function () {
   const parameters = productMocks.validProduct;
   const mockCreateReturn = ProductModel.build(productMocks.createdProduct);
   sinon.stub(ProductModel, 'create').resolves(mockCreateReturn);
+  const mockFindByPkReturn = UserModel.build(loginMocks.existingUser);
+  sinon.stub(UserModel, 'findByPk').resolves(mockFindByPkReturn);
   // Act
   const serviceResponse = await productsService.create(parameters);
   // Assert
