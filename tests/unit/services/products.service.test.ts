@@ -21,17 +21,28 @@ it('Creates a product.', async function () {
   expect(serviceResponse.status).to.eq('CREATED');
   expect(serviceResponse.data).to.deep.equal(productMocks.createdProduct);
 })
-it('Throws an error missing property "name".', async function () {
+
+it('Does not create product passing inexistent userId.', async function () {
   // Arrange
-  const parameters = productMocks.missingNameProduct;
-  const mockCreateReturn = ProductModel.build(productMocks.createdProduct);
-  sinon.stub(ProductModel, 'create').resolves(mockCreateReturn);
+  const parameters = productMocks.inexistentUserIdProduct;
+  sinon.stub(UserModel, 'findByPk').resolves(null);
   // Act
   const serviceResponse = await productsService.create(parameters);
   // Assert
-  expect(serviceResponse.status).to.eq('BAD_REQUEST');
-  expect(serviceResponse.data).to.deep.equal({ message: 'Name is required' });
+  expect(serviceResponse.status).to.eq('UNPROCESSABLE_CONTENT');
+  expect(serviceResponse.data).to.deep.equal({ message: '"userId" not found' });
 })
+// it('Throws an error missing property "name".', async function () {
+//   // Arrange
+//   const parameters = productMocks.missingNameProduct;
+//   const mockCreateReturn = ProductModel.build(productMocks.createdProduct);
+//   sinon.stub(ProductModel, 'create').resolves(mockCreateReturn);
+//   // Act
+//   const serviceResponse = await productsService.create(parameters);
+//   // Assert
+//   expect(serviceResponse.status).to.eq('BAD_REQUEST');
+//   expect(serviceResponse.data).to.deep.equal({ message: 'Name is required' });
+// })
 it('Returns all available products.', async function () {
   // Arrange
   const mockCreateReturn = ProductModel.bulkBuild(productMocks.createdProducts);

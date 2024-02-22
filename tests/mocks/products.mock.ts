@@ -40,9 +40,16 @@ const createdProducts = [
     },
   ]
 
+  const inexistentUserIdProduct = {
+    'name': 'Peixeira do Agreste',
+    'price': "10 peças de ouro",
+    'userId': 9999,
+}
+
 export default {
     validProduct,
     createdProduct,
     missingNameProduct,
     createdProducts,
+    inexistentUserIdProduct,
   };
