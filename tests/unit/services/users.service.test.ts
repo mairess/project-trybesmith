@@ -11,12 +11,14 @@ describe('UsersService', function () {
   type UserOrder = User & Order;
   it('Returns all users with their products id.', async function () {
     // Arrange
-    const mockCreateReturn = UserModel.bulkBuild((userMocks.CreatedUsersWithProducts) as UserOrder[]);
-    sinon.stub(UserModel, 'findAll').resolves(mockCreateReturn);
+  const mockCreateReturn = userMocks.CreatedUsersWithProductsModel.map((product) => ({
+    dataValues: product
+  }))
+    sinon.stub(UserModel, 'findAll').resolves(mockCreateReturn as any);
     // Act
     const serviceResponse = await userService.list();
     // Assert
     expect(serviceResponse.status).to.eq('SUCCESSFUL');
-    // expect(serviceResponse.data).to.deep.equal(userMocks.CreatedUsersWithProducts);
+    expect(serviceResponse.data).to.deep.equal(userMocks.CreatedUsersWithProductsFromService);
   })
 });
