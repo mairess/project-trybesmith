@@ -47,6 +47,17 @@ describe('ProductsController', function () {
     expect(res.status).to.have.been.calledWith(400);
     expect(res.json).to.have.been.calledWith({ message: 'Name is required' });
   });
+  it('Handles internal error when creating products.', async function () {
+    // Arrange
+    const mockCreateReturn = new Error('Internal error');
+    sinon.stub(productsService, 'create').rejects(mockCreateReturn);
+    // Act
+    await productsController.create(req, res, next);
+    // Assert
+    
+    expect(next.args[0][0]).to.be.instanceOf(Error);
+    expect(next.args[0][0].message).to.equal('Internal error');
+  });
   it('Returns all available products.', async function () {
     // Arrange
     const mockCreateReturn = ProductModel.bulkBuild(productMocks.createdProducts)
@@ -68,10 +79,7 @@ describe('ProductsController', function () {
     // Act
     await productsController.list(req, res, next);
     // Assert
-    expect(next).to.have.been.calledOnce;
     expect(next.args[0][0]).to.be.instanceOf(Error);
     expect(next.args[0][0].message).to.equal('Internal error');
   });
-  
-
 });
