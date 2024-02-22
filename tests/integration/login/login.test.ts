@@ -1,7 +1,7 @@
 import sinon from 'sinon';
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
-import { Login } from '../../../src/types/Login';
+// import { Login } from '../../../src/types/Login';
 import app from '../../../src/app';
 import UserModel from '../../../src/database/models/user.model';
 import loginMock from '../../mocks/login.mock';
@@ -10,8 +10,8 @@ chai.use(chaiHttp);
 
 describe('POST /login', function () { 
   beforeEach(function () { sinon.restore(); });
-  const missingPropertiesMessage = { "message": "\"username\" and \"password\" are required" };
-  const badUsernameOrPasswordMessage = { "message": "Username or password invalid" };
+  // const missingPropertiesMessage = { "message": "\"username\" and \"password\" are required" };
+  // const badUsernameOrPasswordMessage = { "message": "Username or password invalid" };
   it('Returns jwt login with valid login data.', async function () {
     // Arrange
     const body = loginMock.validLoginBody;
