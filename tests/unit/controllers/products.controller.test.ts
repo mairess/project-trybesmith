@@ -12,6 +12,7 @@ chai.use(sinonChai);
 describe('ProductsController', function () {
   const req = {} as Request;
   const res = {} as Response;
+  const next = sinon.stub();
 
   beforeEach(function () {
     res.status = sinon.stub().returnsThis();
@@ -27,7 +28,7 @@ describe('ProductsController', function () {
       data: productMocks.createdProduct,
     });
     // Act
-    await productsController.create(req, res);
+    await productsController.create(req, res, next);
     // Assert
     expect(res.status).to.have.been.calledWith(201);
     expect(res.json).to.have.been.calledWith(productMocks.createdProduct);
@@ -41,7 +42,7 @@ describe('ProductsController', function () {
       data: { message: 'Name is required' },
     });
     // Act
-    await productsController.create(req, res);
+    await productsController.create(req, res, next);
     // Assert
     expect(res.status).to.have.been.calledWith(400);
     expect(res.json).to.have.been.calledWith({ message: 'Name is required' });
@@ -54,21 +55,22 @@ describe('ProductsController', function () {
       data: mockCreateReturn,
     });
     // Act
-    await productsController.list(req, res);
+    await productsController.list(req, res, next);
     // Assert
     expect(res.status).to.have.been.calledWith(200);
     expect(res.json).to.have.been.calledWith(mockCreateReturn);
   });
 
-  it('Does not return products.', async function () {
+  it('Handles internal error when listing products.', async function () {
     // Arrange
     const mockCreateReturn = new Error('Internal error');
     sinon.stub(productsService, 'list').rejects(mockCreateReturn);
     // Act
-    await productsController.list(req, res);
+    await productsController.list(req, res, next);
     // Assert
-    expect(res.status).to.have.been.calledWith(500);
-    expect(res.json).to.have.been.calledWith({ message: 'INTERNAL_SERVER_ERROR' });
+    expect(next).to.have.been.calledOnce;
+    expect(next.args[0][0]).to.be.instanceOf(Error);
+    expect(next.args[0][0].message).to.equal('Internal error');
   });
   
 

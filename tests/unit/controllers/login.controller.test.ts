@@ -13,6 +13,7 @@ chai.use(sinonChai);
 describe('LoginController', function () {
   const req = {} as Request;
   const res = {} as Response;
+  const next = sinon.stub();
   const missingPropertiesMessage = { "message": "\"username\" and \"password\" are required" };
   const badUsernameOrPasswordMessage = { "message": "Username or password invalid" };
   const token = { token: 'strongJwt' }
@@ -28,7 +29,7 @@ describe('LoginController', function () {
     const serviceResponse: ServiceResponse<Token> = { status: 'SUCCESSFUL', data: token}
     sinon.stub(loginService, 'verifyLogin').resolves(serviceResponse);
     // Act
-    await loginController.login(req, res);
+    await loginController.login(req, res, next);
     // Assert
     expect(res.status).to.have.been.calledWith(200);
     expect(res.json).to.have.been.calledWith(token);
@@ -42,7 +43,7 @@ describe('LoginController', function () {
     }
     sinon.stub(loginService, 'verifyLogin').resolves(serviceResponse);
     // Act
-    await loginController.login(req, res);
+    await loginController.login(req, res, next);
     // Assert
     expect(res.status).to.have.been.calledWith(400);
     expect(res.json).to.have.been.calledWith(missingPropertiesMessage);
@@ -56,7 +57,7 @@ describe('LoginController', function () {
     }
     sinon.stub(loginService, 'verifyLogin').resolves(serviceResponse);
     // Act
-    await loginController.login(req, res);
+    await loginController.login(req, res, next);
     // Assert
     expect(res.status).to.have.been.calledWith(400);
     expect(res.json).to.have.been.calledWith(missingPropertiesMessage);
@@ -70,7 +71,7 @@ describe('LoginController', function () {
     }
     sinon.stub(loginService, 'verifyLogin').resolves(serviceResponse);
     // Act
-    await loginController.login(req, res);
+    await loginController.login(req, res, next);
     // Assert
     expect(res.status).to.have.been.calledWith(401);
     expect(res.json).to.have.been.calledWith(badUsernameOrPasswordMessage);
@@ -84,7 +85,7 @@ describe('LoginController', function () {
     }
     sinon.stub(loginService, 'verifyLogin').resolves(serviceResponse);
     // Act
-    await loginController.login(req, res);
+    await loginController.login(req, res, next);
     // Assert
     expect(res.status).to.have.been.calledWith(401);
     expect(res.json).to.have.been.calledWith(badUsernameOrPasswordMessage);
