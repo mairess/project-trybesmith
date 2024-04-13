@@ -1,8 +1,16 @@
 # <p align="center">Projeto Trybesmith</p>
 
+<div align="center">
+  
+| Statements                  | Branches                | Functions                 | Lines                |
+| --------------------------- | ----------------------- | ------------------------- | -------------------- |
+| ![Statements](https://img.shields.io/badge/Coverage-100%25-brightgreen.svg) | ![Branches](https://img.shields.io/badge/Coverage-86.36%25-yellow.svg) | ![Functions](https://img.shields.io/badge/Coverage-100%25-brightgreen.svg) | ![Lines](https://img.shields.io/badge/Coverage-100%25-brightgreen.svg)    |
+
+</div>
+
 ## Contexto
 
-Este projeto consiste em uma loja de itens medievais no formato de uma API de `Node.js` com `Express`, utilizando `Typescript` e `Sequelize` seguindo o modelo `MSC`. Sendo possível cadastrar um produto, listar todos produtos, listar usuários com seus respectivos produtos através do relacionamento `1:N` e uma rota de login para obter autenticação com `JWT`. A aplicação também possui uma boa cobertura de testes, com testes de `integração` e testes `unitários` que garantem o correto funcionamento dela.
+Este projeto consiste em uma loja de itens medievais no formato de uma API de `Node.js` com `Express`, utilizando `Typescript` e `Sequelize` seguindo o modelo `MSC`. Sendo possível cadastrar um produto, listar todos produtos, listar usuários com seus respectivos produtos através do relacionamento `1:N` e uma rota de login para obter autenticação com `JWT`. A aplicação também possui uma boa cobertura de testes, com testes de `integração` e testes `unitários`.
 
 <details>
 
@@ -10,7 +18,7 @@ Este projeto consiste em uma loja de itens medievais no formato de uma API de `N
 
 > ⚠️ É preciso ter o [Node](https://nodejs.org/en) instalado em sua máquina.
 >
-> ⚠️ É preciso criar um arquivo `.env` na raiz do projeto, siga o exemplo do arquivo [`env.example`](./env.example).
+<!-- > ⚠️ É preciso criar um arquivo `.env` na raiz do projeto, siga o exemplo do arquivo [`env.example`](./env.example). -->
 >
 
 1. Clone o repositório:
@@ -34,13 +42,13 @@ docker compose up -d db
 4. Crie o banco, rode as migrations e os seeders:
 
 ```BASH
-env $(cat .env) npm run db:reset
+npm run db:reset
 ```
 
 5. Inicie o servidor:
 
 ```BASH
-env $(cat .env) npm run dev
+npm run dev
 ```
 
 6. O servidor estará disponível na porta `3001`
@@ -98,13 +106,15 @@ npm run test:coverage
 
 A documentação desta api está disponível na rota `/api-docs`
 
-## Competências desenvolvidas
+## Stack utilizadas
 
-- `Relacionamento` de tabelas N:1.
-- Autenticação de usurário com `JWT` .
-- Integração e interação com um banco de dados `MySQL`.
-- Conhecimento de arquitetura em camadas `MSC`.
-- Conhecimento em ORM `Sequelize`.
-- Hash de senha com `Bcrypt`.
-- Validação de dados com `Joi`.
-- Testes `unitários` e de `integração` com `mocha`, `chai` e `sinon`.
+- Typescript
+- Node
+- Express
+- Sequelize
+- MySQL
+- JWT
+- Bcrypt
+- Mocha
+- Chai
+- Sinon
