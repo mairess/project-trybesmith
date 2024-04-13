@@ -1,0 +1,232 @@
+openapi: 3.0.0
+info:
+  title: Trybesmith API
+  description: |
+    An API serving as a virtual marketplace for medieval artifacts and weaponry. From custom swords to ornate armor, this platform enables the buying, selling, and customization of authentic medieval items.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3001
+paths:
+  /login:
+    post:
+      summary: Endpoint to log in
+      description: Generates an access token upon successful login.
+      operationId: login
+      tags:
+      - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Successfully generated access token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJYYWJsYXUiLCJpYXQiOjE3MTMwMDMyNjR9.kZlBcGT0QqfexE0R9oIo5lawGF7jRFG7MvCT22qqUhU"
+        '400':
+          description: Bad request - Invalid login data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestLogin'
+              example:
+                message: "\"username\" and \"password\" are required"
+        '401':
+          description: Unauthorized - Invalid user or password data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestLogin'
+              example:
+                message: Username or password invalid
+  /users:
+    get:
+      summary: Endpoint to list users
+      description: Retrieves a list of all registered users.
+      operationId: listUsers
+      tags:
+      - Users
+      responses:
+        '200':
+          description: Successfully retrieved all registered users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserList'
+              example:
+              - username: Hagar
+                productIds: [1, 2]
+              - username: Eddie
+                productIds: [3, 4]
+              - username: Helga
+                productIds: [5]
+  /products:
+    post:
+      summary: Endpoint to create a product
+      description: Creates a new product.
+      operationId: createProduct
+      tags:
+      - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductInput'
+      responses:
+        '201':
+          description: Product created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+        '400':
+          description: Bad request - Invalid login data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestCreateProduct'
+              examples:
+                NameRequired:
+                  value:
+                    message: "\"name\" is required"
+                PriceRequired:
+                  value:
+                    message: "\"price\" is required"
+                UserIdRequired:
+                  value:
+                    message: "\"userId\" is required"
+        '422':
+          description: Unprocessable content - Unable to be followed due to semantic errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvalidRequestLogin'
+              examples:
+                NotStringName:
+                  value:
+                    message: "\"name\" must be a string"
+                NameMinLength:
+                  value:
+                    message: "\"name\" length must be at least 3 characters long"
+                NotStringPrice:
+                  value:
+                    message: "\"price\" must be a string"
+                PriceMinLength:
+                  value:
+                    message: "\"price\" length must be at least 3 characters long"
+                NotNumberUserId:
+                  value:
+                    message: "\"userId\" must be a number"
+                UserIdNotFound:
+                  value:
+                    message: "\"userId\" not found'"
+    get:
+      summary: Endpoint to list products
+      description: Retrieves a list of all registered products.
+      operationId: listProducts
+      tags:
+      - Products
+      responses:
+        '200':
+          description: Successfully retrieved all registered products
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductList'
+              example:
+              - id: 1
+                name: Excalibur
+                price: 10 peças de ouro
+                userId: 1
+              - id: 2
+                name: Espada Justiceira
+                price: 20 peças de ouro
+                userId: 1
+components:
+  schemas:
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          example: Hagar
+        password:
+          type: string
+          example: terrível
+      required:
+      - username
+      - password
+    ProductInput:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Martelo de Thor
+        price:
+          type: string
+          example: 30 peças de ouro
+        userId:
+          type: integer
+          example: 1
+      required:
+      - name
+      - price
+      - userId
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 6
+        name:
+          type: string
+          example: Martelo de Thor
+        price:
+          type: string
+          example: 30 peças de ouro
+        userId:
+          type: integer
+          example: 1
+    ProductList:
+      type: array
+      items:
+        items:
+        $ref: '#/components/schemas/Product'
+    UserList:
+      type: array
+      items:
+        type: object
+        properties:
+          username:
+            type: string
+            description: The name of the user
+          productIds:
+            type: array
+            items:
+              type: integer
+              description: The unique identifier of the product
+    BadRequestLogin:
+      type: object
+      properties:
+        message:
+          type: string
+          example: \"username\" and \"password\" are required
+    InvalidRequestLogin:
+      type: object
+      properties:
+        message:
+          type: string
+    BadRequestCreateProduct:
+      type: object
+      properties:
+        message:
+          type: string

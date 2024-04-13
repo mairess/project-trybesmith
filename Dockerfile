@@ -15,3 +15,4 @@ COPY --chown=node:node .eslintignore .
 COPY --chown=node:node .eslintrc.json .
 COPY --chown=node:node .sequelizerc .
 COPY --chown=node:node tsconfig.json .
+COPY --chown=node:node swagger.yaml .
