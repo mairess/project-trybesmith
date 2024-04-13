@@ -1,7 +1,8 @@
 openapi: 3.0.0
 info:
   title: Trybesmith API
-  description: This is an API for medieval items
+  description: |
+    An API serving as a virtual marketplace for medieval artifacts and weaponry. From custom swords to ornate armor, this platform enables the buying, selling, and customization of authentic medieval items.
   version: 1.0.0
 paths:
   /login:
