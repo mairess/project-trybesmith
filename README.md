@@ -106,7 +106,6 @@ npm run test:coverage
 
 A documentação desta api está disponível na rota `/api-docs`
 
-
 ## Stack utilizadas
 
 - Typescript
@@ -116,6 +115,7 @@ A documentação desta api está disponível na rota `/api-docs`
 - MySQL
 - JWT
 - Bcrypt
+- Docker
 - Mocha
 - Chai
 - Sinon
