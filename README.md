@@ -115,6 +115,7 @@ A documentação desta api está disponível na rota `/api-docs`
 - MySQL
 - JWT
 - Bcrypt
+- Joi
 - Docker
 - Mocha
 - Chai
