@@ -1,8 +1,16 @@
 # <p align="center">Projeto Trybesmith</p>
 
+<div align="center">
+  
+| Statements                  | Branches                | Functions                 | Lines                |
+| --------------------------- | ----------------------- | ------------------------- | -------------------- |
+| ![Statements](https://img.shields.io/badge/Coverage-100%25-brightgreen.svg) | ![Branches](https://img.shields.io/badge/Coverage-86.36%25-yellow.svg) | ![Functions](https://img.shields.io/badge/Coverage-100%25-brightgreen.svg) | ![Lines](https://img.shields.io/badge/Coverage-100%25-brightgreen.svg)    |
+
+</div>
+
 ## Contexto
 
-Este projeto consiste em uma loja de itens medievais no formato de uma API de `Node.js` com `Express`, utilizando `Typescript` e `Sequelize` seguindo o modelo `MSC`. Sendo possível cadastrar um produto, listar todos produtos, listar usuários com seus respectivos produtos através do relacionamento `1:N` e uma rota de login para obter autenticação com `JWT`. A aplicação também possui uma boa cobertura de testes, com testes de `integração` e testes `unitários` que garantem o correto funcionamento dela.
+Este projeto consiste em uma loja de itens medievais no formato de uma API de `Node.js` com `Express`, utilizando `Typescript` e `Sequelize` seguindo o modelo `MSC`. Sendo possível cadastrar um produto, listar todos produtos, listar usuários com seus respectivos produtos através do relacionamento `1:N` e uma rota de login para obter autenticação com `JWT`. A aplicação também possui uma boa cobertura de testes, com testes de `integração` e testes `unitários`.
 
 <details>
 
@@ -98,11 +106,16 @@ npm run test:coverage
 
 A documentação desta api está disponível na rota `/api-docs`
 
-## Competências desenvolvidas
 
-- `Relacionamento` de tabelas N:1.
-- Autenticação de usurário com `JWT` .
-- Integração e interação com um banco de dados `MySQL`.
-- Conhecimento de arquitetura em camadas `MSC`.
-- Conhecimento em ORM `Sequelize`.
-- Testes `unitários` e de `integração` com `mocha`, `chai` e `sinon`.
+## Stack utilizadas
+
+- Typescript
+- Node
+- Express
+- Sequelize
+- MySQL
+- JWT
+- Bcrypt
+- Mocha
+- Chai
+- Sinon
