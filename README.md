@@ -106,6 +106,7 @@ npm run test:coverage
 
 A documentação desta api está disponível na rota `/api-docs`
 
+
 ## Stack utilizadas
 
 - Typescript
