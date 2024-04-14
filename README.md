@@ -106,7 +106,7 @@ npm run test:coverage
 
 A documentação desta api está disponível na rota `/api-docs`
 
-## Stack utilizadas
+## Tecnologias utilizadas
 
 - Typescript
 - Node
@@ -120,3 +120,4 @@ A documentação desta api está disponível na rota `/api-docs`
 - Mocha
 - Chai
 - Sinon
+- Swagger-ui
